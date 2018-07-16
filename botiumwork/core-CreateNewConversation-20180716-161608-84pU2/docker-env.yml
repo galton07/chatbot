@@ -1,0 +1,38 @@
+version: '2'
+services:
+  botium:
+    build:
+      context: >-
+        /home/akhil/Downloads/botium/botiumwork/core-CreateNewConversation-20180716-161608-84pU2/git/Node/core-CreateNewConversation
+    logging:
+      driver: syslog
+      options:
+        syslog-address: 'udp://127.0.0.1:47100'
+    volumes:
+      - >-
+        /home/akhil/Downloads/botium/botiumwork/core-CreateNewConversation-20180716-161608-84pU2/git/Node/core-CreateNewConversation:/usr/src/app
+    environment:
+      IS_BOTIUM_CONTAINER: 'true'
+      MICROSOFT_APP_ID: f452a669-9f03-46f8-8832-7202087cf11b
+      MICROSOFT_APP_PASSWORD: l!G-&nLaz8)5Yy-g
+      NODE_DEBUG: botbuilder
+      DEBUG: '*'
+  botium-botframeworkmock:
+    build:
+      context: >-
+        /home/akhil/Downloads/botium/botiumwork/core-CreateNewConversation-20180716-161608-84pU2/botframeworkmock
+    logging:
+      driver: syslog
+      options:
+        syslog-address: 'udp://127.0.0.1:47100'
+    volumes:
+      - >-
+        /home/akhil/Downloads/botium/botiumwork/core-CreateNewConversation-20180716-161608-84pU2/botframeworkmock:/usr/src/app
+    ports:
+      - '46500:46500'
+    environment:
+      BOTIUM_BOTFRAMEWORK_WEBHOOKPORT: 3978
+      BOTIUM_BOTFRAMEWORK_WEBHOOKPATH: api/messages
+      BOTIUM_BOTFRAMEWORK_APP_ID: f452a669-9f03-46f8-8832-7202087cf11b
+      BOTIUM_BOTFRAMEWORK_CHANNEL_ID: facebook
+      BOTIUM_BOTFRAMEWORK_PUBLISHPORT: 46500
